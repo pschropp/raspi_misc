@@ -6,6 +6,9 @@ execute script after flashing image to SDcard and starting Pi and either
   - connecting it to ethernet
   - connecting it to a screen and a keyboard
 
+## Login as root
+pwd: root
+
 ## Add Wifi
 ```Bash
 nano /etc/network/interfaces.d/wlan0
@@ -16,6 +19,8 @@ nano /etc/network/interfaces.d/wlan0
 ```Bash
 reboot
 ```
+
+## 
 
 ## Update and Upgrade
 Once rebooted and connected to wifi update and upgrade
@@ -48,4 +53,26 @@ passwd
 
 ```Bash
 reboot
+```
+
+## Set locale
+not as root
+```Bash
+apt install -y locales
+locale
+```
+
+## Install a Desktop Environment
+Login as root or use sudo for commands
+
+```Bash
+tasksel
+```
+Will display a window to select a desktop environment. (LXDE is light-weight and used for PiOS)
+
+More desktop environments can be added by executing this command `tasksel` again. After a reboot, choose a user and there is a cog wheel to select the desktop environment.
+
+if tasksel does not work:
+```Bash
+sudo apt install lxde task-lxde-desktop -y
 ```
