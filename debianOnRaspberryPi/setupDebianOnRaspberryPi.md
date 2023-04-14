@@ -65,14 +65,27 @@ locale
 ## Install a Desktop Environment
 Login as root or use sudo for commands
 
+### Option 1
 ```Bash
-tasksel
+sudo apt install tasksel -y
+sudo tasksel install xfce-desktop
+sudo reboot
 ```
-Will display a window to select a desktop environment. (LXDE is light-weight and used for PiOS)
+Will display a window to select a desktop environment. (LXDE is light-weight and used for PiOS. xfce similarly ligh-weight but more extensive)
 
 More desktop environments can be added by executing this command `tasksel` again. After a reboot, choose a user and there is a cog wheel to select the desktop environment.
 
+### Option 2
 if tasksel does not work:
 ```Bash
-sudo apt install lxde task-lxde-desktop -y
+sudo apt install task-xfce-desktop
+sudo reboot
 ```
+select lightdm as display manager
+
+### Set default boot target
+```Bash
+sudo systemctl get-default  # check
+sudo systemctl set-default graphical.target  # set to graphical
+```
+
