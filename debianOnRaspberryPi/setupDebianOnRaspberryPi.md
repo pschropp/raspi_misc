@@ -55,14 +55,33 @@ passwd
 reboot
 ```
 
-## Set locale
+## Optional: Set locale (only necessary when ssh from certain terminals)
 not as root
 ```Bash
 apt install -y locales
 locale
 ```
 
-## Install a Desktop Environment
+## Use NetworkManager to configure connections
+```Bash
+sudo apt install network-manager  # usually already installed on Debian/Ubuntu
+```
+
+Wifi and/or ethernet connections that were used during installation have to be removed (or commented) from `/etc/network/interfaces`:
+```Bash
+sudo nano /etc/network/interfaces  # comment out everything
+sudo nano /etc/NetworkManager/NetworkManager.conf  # set managed to false (=default)
+sudo systemctl restart network-manager
+```
+
+## Share Internet to Ethernet Connection
+```Bash
+sudo nmcli connection modify type ethernet ifname <ethernet name> ipv4.method shared con-name local
+# sudo nmcli connection modify local ipv4.addresses 192.168.42.1/24  # otpional, if not using default ip is required
+sudo nmcli connection up local
+```
+
+## Optional: Install a Desktop Environment
 Login as root or use sudo for commands
 
 ### Option 1
@@ -87,5 +106,6 @@ select lightdm as display manager
 ```Bash
 sudo systemctl get-default  # check
 sudo systemctl set-default graphical.target  # set to graphical
+# sudo systemctl set-default multi-user.target  # set to CLI
 ```
 
